@@ -434,6 +434,18 @@
   @media (prefers-reduced-motion: reduce){
     .metric, .chip, .card, .entry::before{ transition: none; }
   }
+
+/* ---------- back to top ---------- */
+#backToTop{
+position:fixed;right:24px;bottom:24px;width:46px;height:46px;border:1px solid var(--border);
+border-radius:50%;background:var(--panel);color:var(--teal);font-family:var(--mono);
+font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+opacity:0;visibility:hidden;transform:translateY(10px);
+transition:opacity .25s ease,transform .25s ease,visibility .25s ease,border-color .2s ease,background .2s ease;
+z-index:100}
+#backToTop:hover{border-color:var(--teal);background:var(--panel-hi)}
+#backToTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+
 </style>
 </head>
 <body>
@@ -502,7 +514,7 @@
     </div>
   </section>
 
-  <section id="shell" style="padding-top:0;">
+  <section id="shell">
     <div class="section-tag reveal"><span class="path">~/shell</span></div>
     <h2 class="section-title reveal">// try it</h2>
 
@@ -983,7 +995,18 @@
 
     nums.forEach(function(el){ metricObserver.observe(el); });
   })();
+
+// Back to top button
+(function(){
+var btn=document.getElementById('backToTop');
+window.addEventListener('scroll',function(){
+if(window.scrollY>400)btn.classList.add('show');else btn.classList.remove('show');
+});
+btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+
 </script>
 
+<button id="backToTop" aria-label="Back to top">↑</button>
 </body>
 </html>
