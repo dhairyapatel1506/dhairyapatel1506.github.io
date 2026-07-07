@@ -41,6 +41,7 @@
 
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
+  html, body{ overflow-x: hidden; max-width: 100%; }
   body{
     margin:0;
     background: var(--bg);
@@ -884,12 +885,12 @@
       }
     });
 
-    document.getElementById('shell-window').addEventListener('click', function(){ input.focus(); });
+    document.getElementById('shell-window').addEventListener('click', function(){ input.focus({ preventScroll: true }); });
 
     document.querySelectorAll('.shell-hint button').forEach(function(btn){
       btn.addEventListener('click', function(){
         input.value = btn.getAttribute('data-cmd');
-        input.focus();
+        input.focus({ preventScroll: true });
       });
     });
   })();
