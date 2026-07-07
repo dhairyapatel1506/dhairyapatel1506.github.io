@@ -290,6 +290,74 @@
     padding: 3px 8px; border-radius: 4px; margin-top: 10px;
   }
 
+  /* ---------- interactive terminal ---------- */
+  .shell{
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-alt);
+    overflow: hidden;
+    box-shadow: 0 20px 60px -30px rgba(0,0,0,0.6);
+  }
+  .shell-bar{
+    display:flex; align-items:center; gap: 10px;
+    padding: 10px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  .shell-dot{ width:9px; height:9px; border-radius:50%; background: var(--border); }
+  .shell-dot.a{ background: #4a5468; }
+  .shell-dot.b{ background: #4a5468; }
+  .shell-dot.c{ background: var(--teal); }
+  .shell-title{
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    margin-left: 4px;
+  }
+  .shell-live{
+    margin-left: auto; display:flex; align-items:center; gap:6px;
+    font-family: var(--mono); font-size: 11px; color: var(--faint);
+  }
+  .shell-live .dot{
+    width:6px; height:6px; border-radius:50%; background: var(--teal);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .shell-body{
+    font-family: var(--mono); font-size: 13.5px; line-height: 1.7;
+    padding: 18px 18px 0;
+    height: 320px;
+    overflow-y: auto;
+    color: var(--muted);
+    cursor: text;
+  }
+  .shell-body::-webkit-scrollbar{ width: 8px; }
+  .shell-body::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 4px; }
+  .shell-line{ margin: 0 0 10px; white-space: pre-wrap; word-break: break-word; }
+  .shell-line .p{ color: var(--teal); }
+  .shell-line .cmd{ color: var(--text); }
+  .shell-line.out{ color: var(--muted); }
+  .shell-line.out strong{ color: var(--text); }
+  .shell-line.err{ color: var(--amber); }
+  .shell-form{
+    display:flex; align-items:center; gap: 8px;
+    padding: 4px 0 18px;
+  }
+  .shell-form .p{ color: var(--teal); font-family: var(--mono); font-size: 13.5px; user-select: none; }
+  .shell-input{
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--text); font-family: var(--mono); font-size: 13.5px;
+    caret-color: var(--amber);
+  }
+  .shell-hint{
+    padding: 10px 18px; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--faint);
+    display:flex; flex-wrap: wrap; gap: 6px 14px;
+  }
+  .shell-hint button{
+    background: none; border: none; color: var(--faint);
+    font-family: var(--mono); font-size: 11px; cursor: pointer;
+    padding: 0; text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+  }
+  .shell-hint button:hover{ color: var(--teal); text-decoration-color: var(--teal); }
   /* ---------- contact / footer ---------- */
   footer{
     border-top: 1px solid var(--border); padding: 56px 0 40px;
@@ -373,6 +441,7 @@
   <div class="nav-inner">
     <a href="#" class="brand">dhairya<span class="dot">@</span>cloud<span class="dot">:~$</span></a>
     <ul class="nav-links">
+      <li><a href="#shell">shell</a></li>
       <li><a href="#about">about</a></li>
       <li><a href="#stack">stack</a></li>
       <li><a href="#experience">experience</a></li>
@@ -384,6 +453,7 @@
     </button>
   </div>
   <nav class="mobile-panel" id="mobile-panel">
+    <a href="#shell">shell</a>
     <a href="#about">about</a>
     <a href="#stack">stack</a>
     <a href="#experience">experience</a>
@@ -427,6 +497,37 @@
       <div class="metric reveal">
         <span class="num">6</span>
         <span class="label">environments unified</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="shell" style="padding-top:0;">
+    <div class="section-tag reveal"><span class="path">~/shell</span></div>
+    <h2 class="section-title reveal">// try it</h2>
+
+    <div class="shell reveal" id="shell-window">
+      <div class="shell-bar">
+        <span class="shell-dot a"></span>
+        <span class="shell-dot b"></span>
+        <span class="shell-dot c"></span>
+        <span class="shell-title">dhairya@cloud: ~</span>
+        <span class="shell-live"><span class="dot"></span>live</span>
+      </div>
+      <div class="shell-body" id="shell-body" role="log" aria-live="polite">
+        <p class="shell-line out">Welcome. This is a real, tiny shell — type <strong>help</strong> to see what it can do.</p>
+      </div>
+      <form class="shell-form" id="shell-form">
+        <span class="p">dhairya@cloud:~$</span>
+        <input class="shell-input" id="shell-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input">
+      </form>
+      <div class="shell-hint">
+        <span>try:</span>
+        <button type="button" data-cmd="whoami">whoami</button>
+        <button type="button" data-cmd="skills">skills</button>
+        <button type="button" data-cmd="experience">experience</button>
+        <button type="button" data-cmd="contact">contact</button>
+        <button type="button" data-cmd="resume">resume</button>
+        <button type="button" data-cmd="sudo hire dhairya">sudo hire dhairya</button>
       </div>
     </div>
   </section>
@@ -589,6 +690,157 @@
       }
     }
     tick();
+  })();
+
+  // Interactive terminal
+  (function(){
+    var body = document.getElementById('shell-body');
+    var form = document.getElementById('shell-form');
+    var input = document.getElementById('shell-input');
+    var history = [];
+    var historyIdx = -1;
+
+    function esc(str){
+      var d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function print(html, cls){
+      var p = document.createElement('p');
+      p.className = 'shell-line' + (cls ? ' ' + cls : '');
+      p.innerHTML = html;
+      body.appendChild(p);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function printCmd(cmd){
+      print('<span class="p">dhairya@cloud:~$</span> <span class="cmd">' + esc(cmd) + '</span>');
+    }
+
+    var commands = {
+      help: function(){
+        print(
+          'available commands:<br>' +
+          '&nbsp;&nbsp;<strong>whoami</strong> — quick intro<br>' +
+          '&nbsp;&nbsp;<strong>skills</strong> — tech stack<br>' +
+          '&nbsp;&nbsp;<strong>experience</strong> — work history summary<br>' +
+          '&nbsp;&nbsp;<strong>education</strong> — degree &amp; certs<br>' +
+          '&nbsp;&nbsp;<strong>contact</strong> — how to reach me<br>' +
+          '&nbsp;&nbsp;<strong>resume</strong> — download the PDF<br>' +
+          '&nbsp;&nbsp;<strong>sudo hire dhairya</strong> — try it<br>' +
+          '&nbsp;&nbsp;<strong>clear</strong> — clear this terminal',
+          'out'
+        );
+      },
+      whoami: function(){
+        print('Dhairya Patel — Cloud / DevOps Engineer.<br>2+ years shipping and operating cloud-native platforms across AWS and GCP. I automate the boring parts so deploys are fast and pages don\'t go off at 3am.', 'out');
+      },
+      skills: function(){
+        print(
+          '<strong>cloud:</strong> AWS, GCP<br>' +
+          '<strong>iac:</strong> CloudFormation, SAM, Terraform<br>' +
+          '<strong>ci/cd:</strong> GitHub Actions, Bitbucket Pipelines, Jenkins, Argo CD<br>' +
+          '<strong>containers:</strong> Docker, Kubernetes<br>' +
+          '<strong>observability:</strong> Grafana, Loki, Mimir, Coralogix<br>' +
+          '<strong>scripting:</strong> Python, Bash, PowerShell, C/C++',
+          'out'
+        );
+      },
+      experience: function(){
+        print(
+          '<strong>Cloud Engineer</strong> — IAMOPS India Pvt. Ltd. <span style="color:var(--faint)">(Jan 2025 – Jun 2026)</span><br>' +
+          'IaC, CI/CD, GitOps, FinOps and a 24/7 NOC rotation — full detail in the work log below.<br><br>' +
+          '<strong>Software Developer Intern</strong> — Metawear <span style="color:var(--faint)">(May 2024 – Jan 2025)</span><br>' +
+          'Built a 3D virtual fashion platform in Unreal Engine 5.<br><br>' +
+          'scroll to <strong>~/experience</strong> for the full breakdown.',
+          'out'
+        );
+      },
+      education: function(){
+        print(
+          '<strong>B.Tech, AI &amp; Data Science</strong> — A. D. Patel Institute of Technology<br>' +
+          '2021 – 2025 · CGPA 8.58<br><br>' +
+          '<strong>AWS Certified Solutions Architect – Associate</strong> — in progress',
+          'out'
+        );
+      },
+      contact: function(){
+        print(
+          'email: <strong>ts554408@gmail.com</strong><br>' +
+          'phone: <strong>+91 85118 43065</strong><br>' +
+          'github: <strong>github.com/dhairyapatel1506</strong><br>' +
+          'linkedin: <strong>linkedin.com/in/dhairya-patel-19b3b1233</strong>',
+          'out'
+        );
+      },
+      resume: function(){
+        print('opening Dhairya_Patel.pdf ...', 'out');
+        var a = document.createElement('a');
+        a.href = 'Dhairya_Patel.pdf';
+        a.download = '';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      },
+      clear: function(){
+        body.innerHTML = '';
+      },
+      ls: function(){
+        print('about  stack  experience  education  beyond  contact', 'out');
+      }
+    };
+
+    commands['sudo hire dhairya'] = function(){
+      print('[sudo] password for recruiter: ' + '•'.repeat(10), 'out');
+      setTimeout(function(){
+        print('permission granted. drafting an email to ts554408@gmail.com …', 'out');
+        setTimeout(function(){
+          window.location.href = 'mailto:ts554408@gmail.com?subject=Let%27s%20talk';
+        }, 700);
+      }, 500);
+    };
+
+    function run(raw){
+      var cmd = raw.trim();
+      if (!cmd) return;
+      printCmd(cmd);
+      history.push(cmd);
+      historyIdx = history.length;
+
+      var key = cmd.toLowerCase();
+      if (commands[key]){
+        commands[key]();
+      } else {
+        print('command not found: ' + esc(cmd) + ' — type <strong>help</strong> to see what works.', 'err');
+      }
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      run(input.value);
+      input.value = '';
+    });
+
+    input.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowUp'){
+        e.preventDefault();
+        if (historyIdx > 0){ historyIdx--; input.value = history[historyIdx]; }
+      } else if (e.key === 'ArrowDown'){
+        e.preventDefault();
+        if (historyIdx < history.length - 1){ historyIdx++; input.value = history[historyIdx]; }
+        else { historyIdx = history.length; input.value = ''; }
+      }
+    });
+
+    document.getElementById('shell-window').addEventListener('click', function(){ input.focus(); });
+
+    document.querySelectorAll('.shell-hint button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        input.value = btn.getAttribute('data-cmd');
+        input.focus();
+      });
+    });
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
