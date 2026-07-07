@@ -737,7 +737,7 @@
           'available commands:<br>' +
           '&nbsp;&nbsp;<strong>whoami</strong> — quick intro<br>' +
           '&nbsp;&nbsp;<strong>about</strong> — professional summary<br>' +
-          '&nbsp;&nbsp;<strong>stack</strong> — tech stack<br>' +
+          '&nbsp;&nbsp;<strong>skills</strong> — tech stack<br>' +
           '&nbsp;&nbsp;<strong>experience</strong> — work history summary<br>' +
           '&nbsp;&nbsp;<strong>education</strong> — degree &amp; certs<br>' +
           '&nbsp;&nbsp;<strong>beyond</strong> — hackathons &amp; NCC<br>' +
@@ -755,9 +755,6 @@
       },
       about: function(){
         print('Cloud / DevOps Engineer with hands-on production experience across AWS and GCP — Infrastructure as Code, CI/CD, FinOps, plus working knowledge of Kubernetes and GitOps.', 'out');
-      },
-      stack: function(){
-        commands.skills();
       },
       skills: function(){
         print(
@@ -818,7 +815,7 @@
         body.innerHTML = '';
       },
       ls: function(){
-        print('about  stack  experience  education  beyond  contact', 'out');
+        print('about  skills  experience  education  beyond  contact', 'out');
       }
     };
 
@@ -834,7 +831,7 @@
 
     var sectionMap = {
       about: '#about',
-      stack: '#stack',
+      skills: '#stack',
       experience: '#experience',
       education: '#education',
       beyond: '#beyond',
