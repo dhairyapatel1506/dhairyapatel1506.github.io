@@ -338,7 +338,7 @@
   .shell-line.err{ color: var(--amber); }
   .shell-form{
     display:flex; align-items:center; gap: 8px;
-    padding: 4px 0 18px;
+    padding: 4px 18px 18px;
   }
   .shell-form .p{ color: var(--teal); font-family: var(--mono); font-size: 13.5px; user-select: none; }
   .shell-input{
@@ -522,6 +522,7 @@
       </form>
       <div class="shell-hint">
         <span>try:</span>
+        <button type="button" data-cmd="ls">ls</button>
         <button type="button" data-cmd="whoami">whoami</button>
         <button type="button" data-cmd="skills">skills</button>
         <button type="button" data-cmd="experience">experience</button>
@@ -718,23 +719,39 @@
       print('<span class="p">dhairya@cloud:~$</span> <span class="cmd">' + esc(cmd) + '</span>');
     }
 
+    function goto(selector){
+      var el = document.querySelector(selector);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     var commands = {
       help: function(){
         print(
           'available commands:<br>' +
           '&nbsp;&nbsp;<strong>whoami</strong> — quick intro<br>' +
-          '&nbsp;&nbsp;<strong>skills</strong> — tech stack<br>' +
+          '&nbsp;&nbsp;<strong>about</strong> — professional summary<br>' +
+          '&nbsp;&nbsp;<strong>stack</strong> — tech stack<br>' +
           '&nbsp;&nbsp;<strong>experience</strong> — work history summary<br>' +
           '&nbsp;&nbsp;<strong>education</strong> — degree &amp; certs<br>' +
+          '&nbsp;&nbsp;<strong>beyond</strong> — hackathons &amp; NCC<br>' +
           '&nbsp;&nbsp;<strong>contact</strong> — how to reach me<br>' +
           '&nbsp;&nbsp;<strong>resume</strong> — download the PDF<br>' +
           '&nbsp;&nbsp;<strong>sudo hire dhairya</strong> — try it<br>' +
+          '&nbsp;&nbsp;<strong>ls</strong> — list sections<br>' +
           '&nbsp;&nbsp;<strong>clear</strong> — clear this terminal',
           'out'
         );
       },
       whoami: function(){
         print('Dhairya Patel — Cloud / DevOps Engineer.<br>2+ years shipping and operating cloud-native platforms across AWS and GCP. I automate the boring parts so deploys are fast and pages don\'t go off at 3am.', 'out');
+      },
+      about: function(){
+        print('Cloud / DevOps Engineer with hands-on production experience across AWS and GCP — Infrastructure as Code, CI/CD, FinOps, plus working knowledge of Kubernetes and GitOps.', 'out');
+        goto('#about');
+      },
+      stack: function(){
+        commands.skills();
+        goto('#stack');
       },
       skills: function(){
         print(
@@ -752,10 +769,10 @@
           '<strong>Cloud Engineer</strong> — IAMOPS India Pvt. Ltd. <span style="color:var(--faint)">(Jan 2025 – Jun 2026)</span><br>' +
           'IaC, CI/CD, GitOps, FinOps and a 24/7 NOC rotation — full detail in the work log below.<br><br>' +
           '<strong>Software Developer Intern</strong> — Metawear <span style="color:var(--faint)">(May 2024 – Jan 2025)</span><br>' +
-          'Built a 3D virtual fashion platform in Unreal Engine 5.<br><br>' +
-          'scroll to <strong>~/experience</strong> for the full breakdown.',
+          'Built a 3D virtual fashion platform in Unreal Engine 5.',
           'out'
         );
+        goto('#experience');
       },
       education: function(){
         print(
@@ -764,6 +781,17 @@
           '<strong>AWS Certified Solutions Architect – Associate</strong> — in progress',
           'out'
         );
+        goto('#education');
+      },
+      beyond: function(){
+        print(
+          '<strong>Azadi Ka Amrit Mahotsav Hackathon</strong> — 3rd place, college level.<br>' +
+          'Led a team through 36 hours straight to build a Python face recognition system.<br><br>' +
+          '<strong>National Cadet Corps</strong> — Lance Corporal.<br>' +
+          'Selected to represent Gujarat at the All India Thal Sainik Camp 2023 after a 3-month evaluation.',
+          'out'
+        );
+        goto('#beyond');
       },
       contact: function(){
         print(
@@ -773,6 +801,7 @@
           'linkedin: <strong>linkedin.com/in/dhairya-patel-19b3b1233</strong>',
           'out'
         );
+        goto('#contact');
       },
       resume: function(){
         print('opening Dhairya_Patel.pdf ...', 'out');
