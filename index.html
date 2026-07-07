@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhairya Patel — Cloud / DevOps Engineer</title>
+<meta name="description" content="Dhairya Patel — Cloud & DevOps Engineer. AWS, GCP, Kubernetes, GitOps, IaC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0f131a;
+    --bg-alt: #0c0f14;
+    --panel: #161c26;
+    --panel-hi: #1c2330;
+    --border: #262e3c;
+    --text: #e8ecf2;
+    --muted: #8994a7;
+    --faint: #566073;
+    --amber: #f0a868;
+    --teal: #52d9cc;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--amber); color: #10141b; }
+
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 20;
+    background: rgba(15,19,26,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner{
+    max-width: 900px; margin: 0 auto; padding: 16px 28px;
+    display:flex; align-items:center; justify-content: space-between;
+  }
+  .brand{
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .brand .dot{ color: var(--teal); }
+  .nav-links{
+    display:flex; gap: 22px; list-style:none; margin:0; padding:0;
+    font-family: var(--mono); font-size: 12.5px;
+  }
+  .nav-links a{
+    text-decoration:none; color: var(--muted);
+    transition: color .15s ease;
+  }
+  .nav-links a:hover{ color: var(--teal); }
+  .nav-links li::before{ content: none; }
+  @media (max-width: 560px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding: 72px 0 40px;
+  }
+  .status-line{
+    display:flex; align-items:center; gap:8px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .status-dot{
+    width:8px; height:8px; border-radius:50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 0 rgba(82,217,204,.6);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%   { box-shadow: 0 0 0 0 rgba(82,217,204,.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(82,217,204,0); }
+    100% { box-shadow: 0 0 0 0 rgba(82,217,204,0); }
+  }
+
+  h1.title{
+    font-family: var(--mono);
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  #typed-cursor{
+    display:inline-block; width: 10px; height: 0.9em;
+    background: var(--amber); margin-left: 4px;
+    vertical-align: -0.12em;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  @media (prefers-reduced-motion: reduce){
+    #typed-cursor{ animation: none; }
+    .status-dot{ animation: none; }
+  }
+
+  .role{
+    font-size: 17px; color: var(--muted); margin: 0 0 26px;
+  }
+  .role strong{ color: var(--text); font-weight: 600; }
+
+  .lede{
+    max-width: 60ch; color: var(--muted); font-size: 15.5px; margin-bottom: 34px;
+  }
+
+  .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; margin-bottom: 46px; }
+  .btn{
+    font-family: var(--mono); font-size: 13px; text-decoration:none;
+    padding: 10px 18px; border-radius: 6px; border: 1px solid var(--border);
+    transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background: var(--amber); color: #171006; border-color: var(--amber); font-weight: 600; }
+  .btn-primary:hover{ transform: translateY(-1px); }
+  .btn-ghost{ color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+
+  /* ---------- metrics dashboard ---------- */
+  .dash{
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden;
+  }
+  .metric{
+    background: var(--panel); padding: 20px 16px;
+    display:flex; flex-direction: column; gap: 6px;
+  }
+  .metric .num{
+    font-family: var(--mono); font-size: clamp(20px, 3vw, 26px); font-weight: 700;
+    color: var(--teal);
+  }
+  .metric:nth-child(2) .num{ color: var(--amber); }
+  .metric:nth-child(4) .num{ color: var(--amber); }
+  .metric .label{
+    font-size: 11.5px; color: var(--muted); font-family: var(--mono); letter-spacing: 0.01em;
+  }
+  @media (max-width: 640px){
+    .dash{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--border); }
+  .section-tag{
+    font-family: var(--mono); font-size: 12.5px; color: var(--faint);
+    margin-bottom: 6px;
+  }
+  .section-tag .path{ color: var(--teal); }
+  h2.section-title{
+    font-family: var(--mono); font-size: 22px; font-weight: 600; margin: 0 0 28px;
+    color: var(--text);
+  }
+
+  /* ---------- about ---------- */
+  #about p{ color: var(--muted); max-width: 68ch; font-size: 15.5px; }
+  #about p strong{ color: var(--text); }
+
+  /* ---------- stack ---------- */
+  .stack-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 22px 30px;
+  }
+  @media (max-width: 600px){ .stack-grid{ grid-template-columns: 1fr; } }
+  .stack-cat h3{
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 10px; font-weight: 500;
+  }
+  .chip-row{ display:flex; flex-wrap: wrap; gap: 8px; }
+  .chip{
+    font-family: var(--mono); font-size: 12.5px;
+    padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px;
+    color: var(--text); background: var(--panel);
+  }
+
+  /* ---------- experience ---------- */
+  .log{ border-left: 2px solid var(--border); padding-left: 24px; margin-left: 4px; }
+  .entry{ position: relative; margin-bottom: 44px; }
+  .entry:last-child{ margin-bottom: 0; }
+  .entry::before{
+    content: ''; position: absolute; left: -29px; top: 6px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--teal);
+  }
+  .entry-meta{
+    font-family: var(--mono); font-size: 12px; color: var(--faint); margin-bottom: 4px;
+  }
+  .entry-role{ font-size: 17px; font-weight: 600; color: var(--text); margin: 0 0 2px; }
+  .entry-org{ font-size: 14px; color: var(--muted); margin: 0 0 14px; }
+  .entry-org span{ color: var(--faint); }
+  ul.entry-list{ margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  ul.entry-list li{ margin-bottom: 9px; }
+  ul.entry-list li::marker{ color: var(--teal); }
+  ul.entry-list strong{ color: var(--text); }
+
+  /* ---------- ed / certs / beyond ---------- */
+  .card-row{ display:flex; flex-direction: column; gap: 18px; }
+  .card{
+    border: 1px solid var(--border); background: var(--panel);
+    border-radius: 8px; padding: 18px 20px;
+  }
+  .card-title{ font-weight: 600; font-size: 15px; margin: 0 0 3px; }
+  .card-sub{ font-size: 13.5px; color: var(--muted); margin: 0; }
+  .card-meta{ font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: 8px; }
+  .badge{
+    display:inline-block; font-family: var(--mono); font-size: 11px;
+    color: var(--amber); border: 1px solid rgba(240,168,104,0.35);
+    background: rgba(240,168,104,0.08);
+    padding: 3px 8px; border-radius: 4px; margin-top: 10px;
+  }
+
+  /* ---------- contact / footer ---------- */
+  footer{
+    border-top: 1px solid var(--border); padding: 56px 0 40px;
+  }
+  .term{
+    font-family: var(--mono); font-size: 14px; color: var(--muted);
+    background: var(--bg-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 22px; margin-bottom: 30px;
+  }
+  .term .l1{ color: var(--faint); }
+  .term .l2{ margin-top: 8px; }
+  .term .prompt{ color: var(--teal); }
+  .contact-links{
+    display:flex; flex-wrap: wrap; gap: 14px;
+  }
+  .contact-links a{
+    font-family: var(--mono); font-size: 13px; text-decoration:none;
+    color: var(--text); border: 1px solid var(--border);
+    padding: 9px 14px; border-radius: 6px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{ border-color: var(--teal); color: var(--teal); }
+  .footnote{
+    margin-top: 40px; font-family: var(--mono); font-size: 11.5px; color: var(--faint);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">dhairya<span class="dot">@</span>cloud<span class="dot">:~$</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none; padding-top:72px;">
+    <div class="status-line">
+      <span class="status-dot"></span>
+      <span>all systems operational — available for new opportunities</span>
+    </div>
+
+    <h1 class="title"><span id="typed"></span><span id="typed-cursor"></span></h1>
+    <p class="role">Cloud / DevOps Engineer — <strong>AWS</strong> · <strong>GCP</strong> · <strong>Kubernetes</strong> · <strong>GitOps</strong></p>
+    <p class="lede">1.5+ years building and operating cloud-native platforms in production. I automate infrastructure, ship pipelines, and keep systems observable — so deploys get faster and pages don't go off at 3am.</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:ts554408@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://github.com/dhairyapatel1506" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/dhairya-patel-19b3b1233" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+
+    <div class="dash">
+      <div class="metric">
+        <span class="num">90%</span>
+        <span class="label">faster deploys via GitOps</span>
+      </div>
+      <div class="metric">
+        <span class="num">$15k</span>
+        <span class="label">annual cloud spend cut</span>
+      </div>
+      <div class="metric">
+        <span class="num">200+</span>
+        <span class="label">misconfigs remediated</span>
+      </div>
+      <div class="metric">
+        <span class="num">6</span>
+        <span class="label">environments unified</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-tag"><span class="path">~/about</span></div>
+    <h2 class="section-title">// summary</h2>
+    <p><strong>Cloud / DevOps Engineer</strong> with hands-on production experience across AWS and GCP — Infrastructure as Code, CI/CD, GitOps, Kubernetes, and FinOps. I care about operational excellence and developer enablement: making deployments faster, systems more observable, and infrastructure cheaper to run without cutting corners on security.</p>
+  </section>
+
+  <section id="stack">
+    <div class="section-tag"><span class="path">~/stack</span></div>
+    <h2 class="section-title">// technical skills</h2>
+    <div class="stack-grid">
+      <div class="stack-cat">
+        <h3>Cloud Platforms</h3>
+        <div class="chip-row">
+          <span class="chip">AWS</span><span class="chip">GCP</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Infrastructure as Code</h3>
+        <div class="chip-row">
+          <span class="chip">CloudFormation</span><span class="chip">AWS SAM</span><span class="chip">Terraform</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>CI/CD</h3>
+        <div class="chip-row">
+          <span class="chip">GitHub Actions</span><span class="chip">Bitbucket Pipelines</span><span class="chip">Jenkins</span><span class="chip">Argo CD</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Containerization</h3>
+        <div class="chip-row">
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Observability</h3>
+        <div class="chip-row">
+          <span class="chip">Grafana</span><span class="chip">Loki</span><span class="chip">Mimir</span><span class="chip">Coralogix</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Scripting &amp; Languages</h3>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">Bash</span><span class="chip">PowerShell</span><span class="chip">C / C++</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-tag"><span class="path">~/experience</span></div>
+    <h2 class="section-title">// work log</h2>
+
+    <div class="log">
+      <div class="entry">
+        <div class="entry-meta">[ 2025-01 → 2026-06 ]</div>
+        <p class="entry-role">Cloud Engineer</p>
+        <p class="entry-org">IAMOPS India Pvt. Ltd. <span>· Pune, Maharashtra</span></p>
+        <ul class="entry-list">
+          <li>Automated multi-environment serverless infrastructure with <strong>AWS CloudFormation &amp; SAM</strong>, cutting deployment time from hours to minutes.</li>
+          <li>Implemented the <strong>Argo CD "App of Apps"</strong> GitOps pattern to modularize Helm deployments per environment — <strong>90% faster</strong> deployments.</li>
+          <li>Ran day-to-day <strong>Kubernetes</strong> operations across EKS and GKE: onboarding, namespace management, secrets, stateful services.</li>
+          <li>Deployed production web apps via <strong>Terraform + GitHub Actions</strong>, reducing manual effort by 80%.</li>
+          <li>Centralized observability across <strong>6 AWS/GCP environments</strong>, migrating Grafana/Loki/Mimir to Coralogix.</li>
+          <li>Re-architected WAF log ingestion (Amazon Data Firehose + Coralogix) — <strong>$700/month</strong> saved without losing DDoS visibility.</li>
+          <li>Delivered <strong>$15,000/year</strong> in cloud cost savings through FinOps: rightsizing and resource cleanup.</li>
+          <li>Audited AWS/GCP environments manually and with Scout Suite, remediating <strong>200+ security misconfigurations</strong>.</li>
+          <li>Configured AWS Shield Advanced, WAF, and escalation playbooks; coordinated with AWS SRT during live DDoS incidents as part of a 24/7 NOC rotation.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">[ 2024-05 → 2025-01 ]</div>
+        <p class="entry-role">Software Developer Intern</p>
+        <p class="entry-org">Metawear <span>· United States (Remote)</span></p>
+        <ul class="entry-list">
+          <li>Built a full 3D virtual fashion platform end-to-end in 6 months — CLO3D garments simulated on Metahumans inside <strong>Unreal Engine 5</strong>.</li>
+          <li>Designed cloth-simulation physics parameters for natural fabric behavior during movement.</li>
+          <li>Built a virtual studio to preview garments live on moving Metahumans, plus a full catalogue and cart UI.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-tag"><span class="path">~/education</span></div>
+    <h2 class="section-title">// education &amp; certifications</h2>
+    <div class="card-row">
+      <div class="card">
+        <p class="card-title">B.Tech, Artificial Intelligence and Data Science</p>
+        <p class="card-sub">A. D. Patel Institute of Technology (ADIT) — Anand, Gujarat</p>
+        <p class="card-meta">2021 – 2025 · CGPA 8.58</p>
+      </div>
+      <div class="card">
+        <p class="card-title">AWS Certified Solutions Architect – Associate</p>
+        <p class="card-sub">Amazon Web Services</p>
+        <span class="badge">in progress</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="beyond">
+    <div class="section-tag"><span class="path">~/beyond</span></div>
+    <h2 class="section-title">// outside of work</h2>
+    <div class="card-row">
+      <div class="card">
+        <p class="card-title">Azadi Ka Amrit Mahotsav Hackathon — 3rd place (college)</p>
+        <p class="card-sub">Led a team through a 36-hour hackathon, building a Python-based face recognition system.</p>
+        <p class="card-meta">ADIT · Oct 2022</p>
+      </div>
+      <div class="card">
+        <p class="card-title">National Cadet Corps — Lance Corporal</p>
+        <p class="card-sub">Selected to represent Gujarat at the All India Thal Sainik Camp 2023 in Delhi after a 3-month evaluation; mentored junior cadets for national camps.</p>
+        <p class="card-meta">2 Guj Compo (T) Coy NCC · Sep 2022 – Feb 2025</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-tag"><span class="path">~/contact</span></div>
+    <h2 class="section-title">// let's talk</h2>
+
+    <div class="term">
+      <div class="l1"># reach dhairya</div>
+      <div class="l2"><span class="prompt">$</span> echo $CONTACT</div>
+    </div>
+
+    <div class="contact-links">
+      <a href="mailto:ts554408@gmail.com">✉ ts554408@gmail.com</a>
+      <a href="tel:+918511843065">☎ +91 85118 43065</a>
+      <a href="https://github.com/dhairyapatel1506" target="_blank" rel="noopener">⌥ github.com/dhairyapatel1506</a>
+      <a href="https://linkedin.com/in/dhairya-patel-19b3b1233" target="_blank" rel="noopener">in linkedin.com/in/dhairya-patel</a>
+    </div>
+
+    <p class="footnote">© <span id="year"></span> Dhairya Patel. Built with HTML, CSS &amp; a bit too much YAML experience.</p>
+  </div>
+</footer>
+
+<script>
+  // Typing effect for the hero name
+  (function(){
+    var el = document.getElementById('typed');
+    var text = 'Dhairya Patel';
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { el.textContent = text; return; }
+    var i = 0;
+    function tick(){
+      if (i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(tick, 65);
+      }
+    }
+    tick();
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
