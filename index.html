@@ -86,6 +86,21 @@
   .nav-links a{
     text-decoration:none; color: var(--muted);
     transition: color .15s ease;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:100%; height:1px;
+    background: var(--teal);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .25s ease;
+  }
+  .nav-links a:hover::after{
+    transform: scaleX(1);
+    transform-origin: left;
   }
   .nav-links a:hover{ color: var(--teal); }
   .nav-links li::before{ content: none; }
@@ -300,6 +315,56 @@
   .footnote{
     margin-top: 40px; font-family: var(--mono); font-size: 11.5px; color: var(--faint);
   }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- hover polish ---------- */
+  .metric{
+    transition: transform .25s ease, background .25s ease;
+  }
+  .metric:hover{
+    transform: translateY(-3px);
+    background: var(--panel-hi);
+  }
+  .chip{
+    transition: transform .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .chip:hover{
+    border-color: var(--teal);
+    color: var(--teal);
+    transform: translateY(-2px);
+  }
+  .card{
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{
+    transform: translateY(-3px);
+    border-color: var(--teal);
+    box-shadow: 0 8px 24px -12px rgba(82,217,204,0.25);
+  }
+  .entry::before{
+    transition: transform .25s ease, background .25s ease;
+  }
+  .entry:hover::before{
+    background: var(--teal);
+    transform: scale(1.3);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .metric, .chip, .card, .entry::before{ transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -347,19 +412,19 @@
     </div>
 
     <div class="dash">
-      <div class="metric">
+      <div class="metric reveal">
         <span class="num">80%</span>
         <span class="label">less manual deploy effort</span>
       </div>
-      <div class="metric">
+      <div class="metric reveal">
         <span class="num">$15k</span>
         <span class="label">annual cloud spend cut</span>
       </div>
-      <div class="metric">
+      <div class="metric reveal">
         <span class="num">200+</span>
         <span class="label">misconfigs remediated</span>
       </div>
-      <div class="metric">
+      <div class="metric reveal">
         <span class="num">6</span>
         <span class="label">environments unified</span>
       </div>
@@ -376,37 +441,37 @@
     <div class="section-tag"><span class="path">~/stack</span></div>
     <h2 class="section-title">// technical skills</h2>
     <div class="stack-grid">
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>Cloud Platforms</h3>
         <div class="chip-row">
           <span class="chip">AWS</span><span class="chip">GCP</span>
         </div>
       </div>
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>Infrastructure as Code</h3>
         <div class="chip-row">
           <span class="chip">CloudFormation</span><span class="chip">AWS SAM</span><span class="chip">Terraform</span>
         </div>
       </div>
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>CI/CD</h3>
         <div class="chip-row">
           <span class="chip">GitHub Actions</span><span class="chip">Bitbucket Pipelines</span><span class="chip">Jenkins</span><span class="chip">Argo CD</span>
         </div>
       </div>
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>Containerization</h3>
         <div class="chip-row">
           <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span>
         </div>
       </div>
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>Observability</h3>
         <div class="chip-row">
           <span class="chip">Grafana</span><span class="chip">Loki</span><span class="chip">Mimir</span><span class="chip">Coralogix</span>
         </div>
       </div>
-      <div class="stack-cat">
+      <div class="stack-cat reveal">
         <h3>Scripting &amp; Languages</h3>
         <div class="chip-row">
           <span class="chip">Python</span><span class="chip">Bash</span><span class="chip">PowerShell</span><span class="chip">C / C++</span>
@@ -420,7 +485,7 @@
     <h2 class="section-title">// work log</h2>
 
     <div class="log">
-      <div class="entry">
+      <div class="entry reveal">
         <div class="entry-meta">[ 2025-01 → 2026-06 ]</div>
         <p class="entry-role">Cloud Engineer</p>
         <p class="entry-org">IAMOPS India Pvt. Ltd. <span>· Pune, Maharashtra</span></p>
@@ -437,7 +502,7 @@
         </ul>
       </div>
 
-      <div class="entry">
+      <div class="entry reveal">
         <div class="entry-meta">[ 2024-05 → 2025-01 ]</div>
         <p class="entry-role">Software Developer Intern</p>
         <p class="entry-org">Metawear <span>· United States (Remote)</span></p>
@@ -454,12 +519,12 @@
     <div class="section-tag"><span class="path">~/education</span></div>
     <h2 class="section-title">// education &amp; certifications</h2>
     <div class="card-row">
-      <div class="card">
+      <div class="card reveal">
         <p class="card-title">B.Tech, Artificial Intelligence and Data Science</p>
         <p class="card-sub">A. D. Patel Institute of Technology (ADIT) — Anand, Gujarat</p>
         <p class="card-meta">2021 – 2025 · CGPA 8.58</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <p class="card-title">AWS Certified Solutions Architect – Associate</p>
         <p class="card-sub">Amazon Web Services</p>
         <span class="badge">in progress</span>
@@ -471,12 +536,12 @@
     <div class="section-tag"><span class="path">~/beyond</span></div>
     <h2 class="section-title">// outside of work</h2>
     <div class="card-row">
-      <div class="card">
+      <div class="card reveal">
         <p class="card-title">Azadi Ka Amrit Mahotsav Hackathon — 3rd place (college)</p>
         <p class="card-sub">Led a team through a 36-hour hackathon, building a Python-based face recognition system.</p>
         <p class="card-meta">ADIT · Oct 2022</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <p class="card-title">National Cadet Corps — Lance Corporal</p>
         <p class="card-sub">Selected to represent Gujarat at the All India Thal Sainik Camp 2023 in Delhi after a 3-month evaluation; mentored junior cadets for national camps.</p>
         <p class="card-meta">2 Guj Compo (T) Coy NCC · Sep 2022 – Feb 2025</p>
@@ -491,7 +556,7 @@
     <div class="section-tag"><span class="path">~/contact</span></div>
     <h2 class="section-title">// let's talk</h2>
 
-    <div class="term">
+    <div class="term reveal">
       <div class="l1"># reach dhairya</div>
       <div class="l2"><span class="prompt">$</span> echo $CONTACT</div>
     </div>
@@ -542,6 +607,78 @@
         btn.setAttribute('aria-expanded', 'false');
       });
     });
+  })();
+
+  // Scroll-reveal with per-group stagger
+  (function(){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var groups = [document.querySelector('.dash'), document.querySelector('.stack-grid'),
+                  document.querySelector('.log'), document.querySelector('#education .card-row'),
+                  document.querySelector('#beyond .card-row'), document.querySelector('footer .wrap')];
+
+    if (reduced){
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+
+    groups.forEach(function(group){
+      if (!group) return;
+      var items = group.querySelectorAll(':scope > .reveal');
+      items.forEach(function(el, i){
+        el.style.transitionDelay = (i * 90) + 'ms';
+      });
+    });
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
+
+  // Count-up animation for hero metrics, once visible
+  (function(){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nums = document.querySelectorAll('.metric .num');
+    if (reduced) return;
+
+    function animate(el){
+      var raw = el.textContent.trim();
+      var match = raw.match(/(\d+(\.\d+)?)/);
+      if (!match) return;
+      var target = parseFloat(match[1]);
+      var prefix = raw.slice(0, match.index);
+      var suffix = raw.slice(match.index + match[1].length);
+      var duration = 900;
+      var start = null;
+
+      function step(ts){
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(target * eased);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = raw;
+      }
+      requestAnimationFrame(step);
+    }
+
+    var metricObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          animate(entry.target);
+          metricObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    nums.forEach(function(el){ metricObserver.observe(el); });
   })();
 </script>
 
