@@ -523,6 +523,7 @@
       <div class="shell-hint">
         <span>try:</span>
         <button type="button" data-cmd="ls">ls</button>
+        <button type="button" data-cmd="cd experience">cd experience</button>
         <button type="button" data-cmd="whoami">whoami</button>
         <button type="button" data-cmd="skills">skills</button>
         <button type="button" data-cmd="experience">experience</button>
@@ -730,6 +731,7 @@
           '&nbsp;&nbsp;<strong>education</strong> — degree &amp; certs<br>' +
           '&nbsp;&nbsp;<strong>beyond</strong> — hackathons &amp; NCC<br>' +
           '&nbsp;&nbsp;<strong>contact</strong> — how to reach me<br>' +
+          '&nbsp;&nbsp;<strong>cd &lt;section&gt;</strong> — jump to that part of the page<br>' +
           '&nbsp;&nbsp;<strong>resume</strong> — download the PDF<br>' +
           '&nbsp;&nbsp;<strong>sudo hire dhairya</strong> — try it<br>' +
           '&nbsp;&nbsp;<strong>ls</strong> — list sections<br>' +
@@ -819,6 +821,30 @@
       }, 500);
     };
 
+    var sectionMap = {
+      about: '#about',
+      stack: '#stack',
+      experience: '#experience',
+      education: '#education',
+      beyond: '#beyond',
+      contact: '#contact'
+    };
+
+    function handleCd(target){
+      if (!target){
+        print('cd: missing operand — try <strong>cd about</strong>', 'err');
+        return;
+      }
+      var sel = sectionMap[target];
+      if (sel){
+        var el = document.querySelector(sel);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        print('→ jumped to ~/' + target, 'out');
+      } else {
+        print('cd: ' + esc(target) + ': no such section — try ' + Object.keys(sectionMap).join(', '), 'err');
+      }
+    }
+
     function run(raw){
       var cmd = raw.trim();
       if (!cmd) return;
@@ -827,6 +853,12 @@
       historyIdx = history.length;
 
       var key = cmd.toLowerCase();
+
+      if (key === 'cd' || key.indexOf('cd ') === 0){
+        handleCd(key.slice(2).trim());
+        return;
+      }
+
       if (commands[key]){
         commands[key]();
       } else {
