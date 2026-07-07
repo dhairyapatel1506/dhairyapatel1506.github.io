@@ -435,7 +435,7 @@
     .metric, .chip, .card, .entry::before{ transition: none; }
   }
 
-#backToTop{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border-radius:50%;border:1px solid var(--border);background:var(--panel);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(20px);transition:.25s;z-index:9999}
+#backToTop{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border-radius:50%;border:1px solid var(--border);background:var(--panel);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;padding-top:1px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(20px);transition:.25s;z-index:9999}
 #backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
 #backToTop:hover{border-color:var(--teal);background:var(--panel-hi)}
 </style>
@@ -991,7 +991,7 @@
 (function(){
 const btn=document.createElement('button');
 btn.id='backToTop';
-btn.innerHTML='↑';
+btn.innerHTML='▲';
 btn.setAttribute('aria-label','Back to top');
 document.body.appendChild(btn);
 function update(){btn.classList.toggle('show',window.scrollY>100);}
