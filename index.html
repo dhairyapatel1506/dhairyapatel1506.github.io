@@ -437,7 +437,8 @@
 
 #backToTop{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border-radius:50%;border:1px solid var(--border);background:var(--panel);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;padding-top:1px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(20px);transition:.25s;z-index:9999}
 #backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-#backToTop:hover,#backToTop:focus-visible{border-color:var(--teal);background:var(--panel-hi)}
+#backToTop:hover{border-color:var(--teal);background:var(--panel-hi)}
+#backToTop.focused{border-color:var(--teal);background:var(--panel-hi);}
 #backToTop:focus,#backToTop:focus-visible,#backToTop:active{outline:none!important;box-shadow:none;}
 #backToTop{appearance:none;-webkit-appearance:none;-webkit-touch-callout:none;user-select:none;}
 #backToTop::-moz-focus-inner{border:0;}
@@ -1004,14 +1005,14 @@ window.addEventListener('scroll',update,{passive:true});
 update();
 btn.addEventListener('pointerdown',function(e){
 e.preventDefault();
-document.activeElement&&document.activeElement.blur();
-btn.blur();
+btn.classList.add('focused');
 window.scrollTo({top:0,behavior:'smooth'});
 },{passive:false});
 
 window.addEventListener('scroll',function(){
-btn.blur();
-if(document.activeElement===btn)document.body.focus();
+if(window.scrollY<10){
+btn.classList.remove('focused');
+}
 },{passive:true});
 
 window.addEventListener('touchend',()=>btn.blur(),{passive:true});
