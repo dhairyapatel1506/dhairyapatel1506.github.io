@@ -719,11 +719,6 @@
       print('<span class="p">dhairya@cloud:~$</span> <span class="cmd">' + esc(cmd) + '</span>');
     }
 
-    function goto(selector){
-      var el = document.querySelector(selector);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
     var commands = {
       help: function(){
         print(
@@ -747,11 +742,9 @@
       },
       about: function(){
         print('Cloud / DevOps Engineer with hands-on production experience across AWS and GCP — Infrastructure as Code, CI/CD, FinOps, plus working knowledge of Kubernetes and GitOps.', 'out');
-        goto('#about');
       },
       stack: function(){
         commands.skills();
-        goto('#stack');
       },
       skills: function(){
         print(
@@ -772,7 +765,6 @@
           'Built a 3D virtual fashion platform in Unreal Engine 5.',
           'out'
         );
-        goto('#experience');
       },
       education: function(){
         print(
@@ -781,7 +773,6 @@
           '<strong>AWS Certified Solutions Architect – Associate</strong> — in progress',
           'out'
         );
-        goto('#education');
       },
       beyond: function(){
         print(
@@ -791,7 +782,6 @@
           'Selected to represent Gujarat at the All India Thal Sainik Camp 2023 after a 3-month evaluation.',
           'out'
         );
-        goto('#beyond');
       },
       contact: function(){
         print(
@@ -801,7 +791,6 @@
           'linkedin: <strong>linkedin.com/in/dhairya-patel-19b3b1233</strong>',
           'out'
         );
-        goto('#contact');
       },
       resume: function(){
         print('opening Dhairya_Patel.pdf ...', 'out');
