@@ -860,7 +860,7 @@
       history.push(cmd);
       historyIdx = history.length;
 
-      var key = cmd.toLowerCase();
+      var key = cmd;
 
       if (key === 'cd' || key.indexOf('cd ') === 0){
         handleCd(key.slice(2).trim());
