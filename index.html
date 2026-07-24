@@ -674,18 +674,6 @@
     <h2 class="section-title">// things i've shipped</h2>
     <div class="card-row">
       <div class="card reveal">
-        <p class="card-title">Split — share expenses, settle up without the awkward math</p>
-        <p class="card-sub">Splitwise-style expense splitter: groups, equal/exact splits with money as integer paise, live balances with debt simplification (a whole group settles in at most N−1 transfers), email invites and weekly reminders via a BullMQ worker. Self-hosted end to end — a Terraform-provisioned Oracle Cloud ARM VM running the whole stack in Docker Compose behind Nginx with Let's Encrypt TLS.</p>
-        <div class="project-chips chip-row">
-          <span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Fastify</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">BullMQ</span><span class="chip">Docker</span><span class="chip">Terraform</span><span class="chip">Nginx</span>
-        </div>
-        <div class="project-links">
-          <a href="https://split.dhairya.cloud" target="_blank" rel="noopener">▶ split.dhairya.cloud ↗</a>
-          <a href="https://github.com/dhairyapatel1506/split" target="_blank" rel="noopener">⌥ source ↗</a>
-        </div>
-        <p class="card-meta">live · self-hosted on Oracle Cloud · infrastructure as code, $0/month</p>
-      </div>
-      <div class="card reveal">
         <p class="card-title">Sesh — watch YouTube together, perfectly in sync</p>
         <p class="card-sub">Shared rooms where playback stays locked within tens of milliseconds for everyone watching. NTP-style clock sync and three-tier drift correction (pitch-preserved rate nudges, so corrections are inaudible) over Socket.IO, plus built-in YouTube search and room chat.</p>
         <div class="project-chips chip-row">
@@ -695,7 +683,19 @@
           <a href="https://sesh.dhairya.cloud" target="_blank" rel="noopener">▶ sesh.dhairya.cloud ↗</a>
           <a href="https://github.com/dhairyapatel1506/sesh" target="_blank" rel="noopener">⌥ source ↗</a>
         </div>
-        <p class="card-meta">live · deployed on Render · CI/CD via git push</p>
+        <p class="card-meta">live · deployed on Render · CI/CD via git push · $0/month</p>
+      </div>
+      <div class="card reveal">
+        <p class="card-title">Split — share expenses, settle up without the awkward math</p>
+        <p class="card-sub">Splitwise-style expense splitter: groups, equal/exact splits with money as integer paise, live balances with debt simplification (a whole group settles in at most N−1 transfers), email invites and weekly reminders via a BullMQ worker. Self-hosted end to end — a Terraform-provisioned Oracle Cloud ARM VM running the whole stack in Docker Compose behind Nginx with Let's Encrypt TLS.</p>
+        <div class="project-chips chip-row">
+          <span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Fastify</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">BullMQ</span><span class="chip">Docker</span><span class="chip">Terraform</span><span class="chip">Nginx</span>
+        </div>
+        <div class="project-links">
+          <a href="https://split.dhairya.cloud" target="_blank" rel="noopener">▶ split.dhairya.cloud ↗</a>
+          <a href="https://github.com/dhairyapatel1506/split" target="_blank" rel="noopener">⌥ source ↗</a>
+        </div>
+        <p class="card-meta">live · self-hosted on Oracle Cloud · infrastructure as code · $0/month</p>
       </div>
     </div>
   </section>
@@ -864,12 +864,12 @@
       },
       projects: function(){
         print(
-          '<strong>split</strong> — share expenses, settle up without the awkward math.<br>' +
-          'Groups, debt simplification, email invites &amp; reminders. Self-hosted: Terraform + Oracle Cloud ARM + Docker Compose + Nginx/TLS.<br>' +
-          'live: <a href="https://split.dhairya.cloud" target="_blank" rel="noopener" style="color:var(--teal)">split.dhairya.cloud</a> · source: <a href="https://github.com/dhairyapatel1506/split" target="_blank" rel="noopener" style="color:var(--teal)">github.com/dhairyapatel1506/split</a><br><br>' +
           '<strong>sesh</strong> — watch YouTube together, perfectly in sync.<br>' +
           'Shared rooms, real-time sync engine over Socket.IO (clock sync + drift correction), search, chat.<br>' +
-          'live: <a href="https://sesh.dhairya.cloud" target="_blank" rel="noopener" style="color:var(--teal)">sesh.dhairya.cloud</a> · source: <a href="https://github.com/dhairyapatel1506/sesh" target="_blank" rel="noopener" style="color:var(--teal)">github.com/dhairyapatel1506/sesh</a>',
+          'live: <a href="https://sesh.dhairya.cloud" target="_blank" rel="noopener" style="color:var(--teal)">sesh.dhairya.cloud</a> · source: <a href="https://github.com/dhairyapatel1506/sesh" target="_blank" rel="noopener" style="color:var(--teal)">github.com/dhairyapatel1506/sesh</a><br><br>' +
+          '<strong>split</strong> — share expenses, settle up without the awkward math.<br>' +
+          'Groups, debt simplification, email invites &amp; reminders. Self-hosted: Terraform + Oracle Cloud ARM + Docker Compose + Nginx/TLS.<br>' +
+          'live: <a href="https://split.dhairya.cloud" target="_blank" rel="noopener" style="color:var(--teal)">split.dhairya.cloud</a> · source: <a href="https://github.com/dhairyapatel1506/split" target="_blank" rel="noopener" style="color:var(--teal)">github.com/dhairyapatel1506/split</a>',
           'out'
         );
       },
