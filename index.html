@@ -370,6 +370,29 @@
     text-decoration-color: var(--border);
   }
   .shell-hint button:hover{ color: var(--teal); text-decoration-color: var(--teal); }
+  /* ---------- support ---------- */
+  .support-card{
+    border: 1px solid var(--border); background: var(--panel);
+    border-radius: 8px; padding: 22px 24px;
+  }
+  .support-card p{
+    color: var(--muted); font-size: 14.5px; max-width: 62ch; margin: 0 0 18px;
+  }
+  .support-card p strong{ color: var(--text); }
+  .support-term{
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    background: var(--bg-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .support-term .prompt{ color: var(--teal); }
+  .support-term .flag{ color: var(--amber); }
+  .razorpay-slot form{ margin: 0; }
+  .support-note{
+    font-family: var(--mono); font-size: 11.5px; color: var(--faint);
+    margin-top: 14px !important; margin-bottom: 0 !important;
+  }
+
   /* ---------- contact / footer ---------- */
   footer{
     border-top: 1px solid var(--border); padding: 56px 0 40px;
@@ -469,6 +492,7 @@
       <li><a href="#experience">experience</a></li>
       <li><a href="#projects">projects</a></li>
       <li><a href="#education">education</a></li>
+      <li><a href="#support">support</a></li>
       <li><a href="#contact">contact</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-panel" aria-label="Toggle menu">
@@ -482,6 +506,7 @@
     <a href="#experience">experience</a>
     <a href="#projects">projects</a>
     <a href="#education">education</a>
+    <a href="#support">support</a>
     <a href="#contact">contact</a>
   </nav>
 </header>
@@ -554,6 +579,7 @@
         <button type="button" data-cmd="projects">projects</button>
         <button type="button" data-cmd="contact">contact</button>
         <button type="button" data-cmd="resume">resume</button>
+        <button type="button" data-cmd="chai">chai</button>
         <button type="button" data-cmd="sudo hire dhairya">sudo hire dhairya</button>
       </div>
     </div>
@@ -696,6 +722,19 @@
     </div>
   </section>
 
+  <section id="support">
+    <div class="section-tag"><span class="path">~/support</span></div>
+    <h2 class="section-title">// buy me a chai</h2>
+    <div class="support-card reveal">
+      <p>If something here made your day a little easier — a project, a pipeline idea, or a perfectly synced <a href="https://sesh.dhairya.cloud" target="_blank" rel="noopener" style="color:var(--teal); text-underline-offset:3px;"><strong>sesh</strong></a> — you can toss a chai my way. <strong>Any amount you like</strong>, via UPI, card or netbanking. No signup, powered by Razorpay.</p>
+      <div class="support-term"><span class="prompt">$</span> ./support.sh <span class="flag">--amount</span>=your-call <span class="flag">--method</span>=upi|card|netbanking</div>
+      <div class="razorpay-slot">
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THDG1t2nWIFmWW" async></script></form>
+      </div>
+      <p class="support-note"># 100% optional. the best support is still telling someone about my work.</p>
+    </div>
+  </section>
+
 </main>
 
 <footer id="contact">
@@ -776,6 +815,7 @@
           '&nbsp;&nbsp;<strong>education</strong> — degree &amp; certs<br>' +
           '&nbsp;&nbsp;<strong>beyond</strong> — hackathons &amp; NCC<br>' +
           '&nbsp;&nbsp;<strong>contact</strong> — how to reach me<br>' +
+          '&nbsp;&nbsp;<strong>chai</strong> — buy me a chai ☕<br>' +
           '&nbsp;&nbsp;<strong>cd &lt;section&gt;</strong> — jump to that part of the page<br>' +
           '&nbsp;&nbsp;<strong>resume</strong> — download the PDF<br>' +
           '&nbsp;&nbsp;<strong>sudo hire dhairya</strong> — try it<br>' +
@@ -853,11 +893,16 @@
         a.click();
         a.remove();
       },
+      chai: function(){
+        print('brewing... ☕ any amount works — UPI, card or netbanking.', 'out');
+        var el = document.querySelector('#support');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      },
       clear: function(){
         body.innerHTML = '';
       },
       ls: function(){
-        print('about  skills  experience  projects  education  beyond  contact', 'out');
+        print('about  skills  experience  projects  education  beyond  support  contact', 'out');
       }
     };
 
@@ -878,6 +923,7 @@
       projects: '#projects',
       education: '#education',
       beyond: '#beyond',
+      support: '#support',
       contact: '#contact'
     };
 
